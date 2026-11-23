@@ -1,0 +1,29 @@
+# Build output
+App/bin/
+App/obj/
+App/publish/
+
+# IDE
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build artifacts and release binaries
+Installer/*.exe
+Installer/*.log
+Portable/*
+!Portable/README.md
+
+# Local settings and logs
+*.log
+*.bak
+*.tmp
+*.tmp.*
+settings.local.json
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store

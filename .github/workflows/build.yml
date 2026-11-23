@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    name: Build Windows x64
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore
+        run: dotnet restore PRISM.sln
+
+      - name: Build
+        run: dotnet build PRISM.sln -c Release --no-restore -warnaserror
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: PRISM-win-x64
+          path: App/bin/Release/net9.0-windows/
+          if-no-files-found: error
+          retention-days: 14

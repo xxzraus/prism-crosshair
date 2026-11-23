@@ -1,0 +1,89 @@
+name: Bug report
+description: Report a reproducible problem with PRISM
+title: "[Bug]: "
+labels: ["bug"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill in as much detail as you can.
+        Do not include personal data, game account details or anti-cheat logs.
+
+  - type: input
+    id: version
+    attributes:
+      label: PRISM version
+      description: Shown on the About page, for example 1.1.0.
+      placeholder: "1.1.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: build
+    attributes:
+      label: Build
+      options:
+        - Portable
+        - Installer
+        - Built from source
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 24H2 x64"
+    validations:
+      required: true
+
+  - type: input
+    id: display
+    attributes:
+      label: Display setup
+      description: Resolution, scaling and number of monitors.
+      placeholder: "1920x1080, 100%, one monitor"
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Editor
+        2. Set...
+        3. See...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Attach `%APPDATA%\PrismCrosshair\prism.log` if it exists.
+      render: text
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I checked that this is not caused by exclusive fullscreen mode.
+          required: false
+        - label: I removed personal data from logs and screenshots.
+          required: true

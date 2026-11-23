@@ -1,0 +1,23 @@
+<Application x:Class="PrismCrosshair.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:svc="clr-namespace:PrismCrosshair.Services"
+             ShutdownMode="OnExplicitShutdown">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Theme.xaml"/>
+                <ResourceDictionary Source="Themes/Icons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <svc:HexToBrushConverter x:Key="HexToBrush"/>
+            <svc:GradientBrushConverter x:Key="GradientBrush"/>
+            <svc:BoolToVisibilityConverter x:Key="BoolToVis"/>
+            <svc:EmptyStringToVisibilityConverter x:Key="EmptyToVis"/>
+            <svc:OpacityBrushConverter x:Key="OpacityBrush"/>
+            <svc:ThemeBrushConverter x:Key="ThemeBrush"/>
+            <svc:AccentPreviewBrushConverter x:Key="AccentPreviewBrush"/>
+            <svc:MultiplyConverter x:Key="Multiply"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

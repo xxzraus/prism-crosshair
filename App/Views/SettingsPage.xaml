@@ -1,0 +1,367 @@
+<UserControl x:Class="PrismCrosshair.Views.SettingsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <UserControl.Resources>
+        <Style x:Key="ThemeCardButton" TargetType="Button">
+            <Setter Property="Height" Value="74"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bg" Background="{DynamicResource SurfaceBrush}" BorderBrush="{DynamicResource StrokeSoftBrush}" BorderThickness="1" CornerRadius="12" Padding="11">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bg" Property="BorderBrush" Value="{DynamicResource AccentBorder}"/>
+                                <Setter TargetName="Bg" Property="Background" Value="{DynamicResource Surface2Brush}"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter TargetName="Bg" Property="BorderBrush" Value="{DynamicResource AccentBorder}"/>
+                                <Setter TargetName="Bg" Property="Background" Value="{DynamicResource Surface2Brush}"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SettingTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11.5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+        </Style>
+
+        <Style x:Key="SettingSubtitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="9.5"/>
+            <Setter Property="Foreground" Value="{StaticResource TextMutedBrush}"/>
+            <Setter Property="Margin" Value="0,2,20,0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="28,16,28,28">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.12*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT -->
+            <StackPanel Grid.Column="0">
+                <!-- THEME -->
+                <Border Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="Appearance" Style="{StaticResource SectionTitle}" FontSize="15"/>
+                                <TextBlock Text="Overall tone and accent" Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+                            </StackPanel>
+                            <Border Style="{StaticResource Pill}" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock Text="6 THEMES" FontFamily="{StaticResource MonoFont}" FontSize="8"
+                                           Foreground="{StaticResource TextMutedBrush}"/>
+                            </Border>
+                        </Grid>
+
+                        <ItemsControl x:Name="ThemeItems" Margin="0,11,0,0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <UniformGrid Columns="3"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource ThemeCardButton}" Tag="{Binding}" Click="Theme_Click">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="46"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Width="40" Height="40" CornerRadius="11" VerticalAlignment="Center"
+                                                    Background="{Binding Key, Converter={StaticResource ThemeBrush}}">
+                                                <Ellipse Width="12" Height="12" Fill="#66FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,8,0"/>
+                                            </Border>
+                                            <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding Label}" FontSize="11.5" FontWeight="SemiBold"
+                                                           Foreground="{StaticResource TextBrush}"/>
+                                                <TextBlock Text="{Binding Hint}" FontSize="8.5" Foreground="{StaticResource TextMutedBrush}" Margin="0,2,0,0"/>
+                                            </StackPanel>
+                                            <Border Grid.Column="2" Width="18" Height="18" CornerRadius="6" VerticalAlignment="Top"
+                                                    Background="{DynamicResource AccentGradient}">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <Path Data="{StaticResource IcoCheck}" Stroke="#07110D" StrokeThickness="2.3" Width="9" Height="9"
+                                                      Stretch="Uniform" Fill="Transparent" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+
+                <!-- APP -->
+                <Border Style="{StaticResource CardBorder}" Margin="0,14,0,0">
+                    <StackPanel>
+                        <TextBlock Text="Application" Style="{StaticResource SectionTitle}" FontSize="15"/>
+                        <TextBlock Text="Window behavior and background processes" Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+
+                        <Grid Margin="0,14,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Minimize to tray" Style="{StaticResource SettingTitle}"/>
+                                <TextBlock Text="The close button hides the window; the crosshair stays on screen" Style="{StaticResource SettingSubtitle}"/>
+                            </StackPanel>
+                            <ToggleButton Style="{StaticResource ToggleSwitch}" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Preferences.MinimizeToTray, Mode=TwoWay}"/>
+                        </Grid>
+                        <Border Style="{StaticResource Divider}" Margin="0,11"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Start minimized" Style="{StaticResource SettingTitle}"/>
+                                <TextBlock Text="Straight to the tray, no window at startup" Style="{StaticResource SettingSubtitle}"/>
+                            </StackPanel>
+                            <ToggleButton Style="{StaticResource ToggleSwitch}" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Preferences.StartMinimized, Mode=TwoWay}"/>
+                        </Grid>
+                        <Border Style="{StaticResource Divider}" Margin="0,11"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Hotkey hints" Style="{StaticResource SettingTitle}"/>
+                                <TextBlock Text="Show F8 and F9 in the title bar" Style="{StaticResource SettingSubtitle}"/>
+                            </StackPanel>
+                            <ToggleButton Style="{StaticResource ToggleSwitch}" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Preferences.ShowHotkeyHints, Mode=TwoWay}"/>
+                        </Grid>
+                        <Border Style="{StaticResource Divider}" Margin="0,11"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Performance monitor" Style="{StaticResource SettingTitle}"/>
+                                <TextBlock Text="Show memory and CPU in the sidebar" Style="{StaticResource SettingSubtitle}"/>
+                            </StackPanel>
+                            <ToggleButton Style="{StaticResource ToggleSwitch}" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Preferences.ShowPerformance, Mode=TwoWay}"/>
+                        </Grid>
+                        <Border Style="{StaticResource Divider}" Margin="0,11"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Live screen preview" Style="{StaticResource SettingTitle}"/>
+                                <TextBlock Text="The studio turns transparent while you drag a slider" Style="{StaticResource SettingSubtitle}"/>
+                            </StackPanel>
+                            <ToggleButton Style="{StaticResource ToggleSwitch}" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Preferences.LivePreview, Mode=TwoWay}"/>
+                        </Grid>
+
+                        <StackPanel Margin="0,11,0,0" Visibility="{Binding Preferences.LivePreview, Converter={StaticResource BoolToVis}}">
+                            <Grid>
+                                <TextBlock Text="Studio opacity while adjusting" Style="{StaticResource FieldLabel}"/>
+                                <TextBlock Text="{Binding Preferences.LivePreviewOpacity, StringFormat={}{0:P0}}" Style="{StaticResource ValueText}"/>
+                            </Grid>
+                            <Slider Style="{StaticResource ModernSlider}" Minimum="0.05" Maximum="0.6"
+                                    Value="{Binding Preferences.LivePreviewOpacity, Mode=TwoWay}" Margin="0,3,0,0"/>
+                            <TextBlock Text="The crosshair appears above the window while you hold the slider. Release — the studio returns."
+                                       Style="{StaticResource MutedText}" FontSize="9" Margin="2,5,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- PERFORMANCE -->
+                <Border Style="{StaticResource CardBorder}" Margin="0,14,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock Text="Performance" Style="{StaticResource SectionTitle}" FontSize="15"/>
+                                <TextBlock Text="Lightweight mode for low-end PCs and laptops" Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+                            </StackPanel>
+                            <Border Style="{StaticResource Pill}" Background="#0A1A15" BorderBrush="#1C3B30" HorizontalAlignment="Right"
+                                    VerticalAlignment="Center">
+                                <TextBlock Text="OPTIMIZED" FontFamily="{StaticResource MonoFont}" FontSize="8" Foreground="{StaticResource GreenBrush}"/>
+                            </Border>
+                        </Grid>
+
+                        <Grid Margin="0,14,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Eco mode" Style="{StaticResource SettingTitle}"/>
+                                <TextBlock Text="No animation, static overlay rendering" Style="{StaticResource SettingSubtitle}"/>
+                            </StackPanel>
+                            <ToggleButton Style="{StaticResource ToggleSwitch}" Grid.Column="1" VerticalAlignment="Center" IsChecked="{Binding Preferences.EcoMode, Mode=TwoWay}"/>
+                        </Grid>
+
+                        <Grid Margin="0,14,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="MEMORY" Style="{StaticResource MicroLabel}"/>
+                                <TextBlock Text="{Binding MemoryText}" FontFamily="{StaticResource MonoFont}" FontSize="14"
+                                           Foreground="{StaticResource TextBrush}" Margin="0,3,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="CPU" Style="{StaticResource MicroLabel}"/>
+                                <TextBlock Text="{Binding CpuText}" FontFamily="{StaticResource MonoFont}" FontSize="14"
+                                           Foreground="{StaticResource TextBrush}" Margin="0,3,0,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="RENDERING" Style="{StaticResource MicroLabel}"/>
+                                <TextBlock Text="WPF" FontFamily="{StaticResource MonoFont}" FontSize="14"
+                                           Foreground="{StaticResource TextBrush}" Margin="0,3,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <TextBlock Text="PRISM does not use Electron or WebView. The interface and overlay run on native WPF."
+                                   Style="{StaticResource MutedText}" FontSize="9" Margin="0,12,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- RIGHT -->
+            <StackPanel Grid.Column="2">
+                <!-- LANGUAGE -->
+                <Border Style="{StaticResource CardBorder}" Margin="0,0,0,14">
+                    <StackPanel>
+                        <TextBlock Text="Language" Style="{StaticResource SectionTitle}" FontSize="15"/>
+                        <TextBlock Text="Interface language" Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+                        <ComboBox x:Name="LanguageBox" Margin="0,13,0,0" Style="{StaticResource PrismComboBox}"
+                                  SelectedValuePath="Tag" SelectedValue="{Binding Preferences.Language, Mode=TwoWay}"
+                                  SelectionChanged="Language_Changed">
+                            <ComboBoxItem Content="English" Tag="en"/>
+                            <ComboBoxItem Content="Русский" Tag="ru"/>
+                        </ComboBox>
+                        <TextBlock Text="Changes apply immediately." Style="{StaticResource MutedText}" FontSize="9" Margin="0,9,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- DATA -->
+                <Border Style="{StaticResource CardBorder}">
+                    <StackPanel>
+                        <TextBlock Text="Data" Style="{StaticResource SectionTitle}" FontSize="15"/>
+                        <TextBlock Text="Settings are stored locally in your Windows profile" Style="{StaticResource MutedText}" Margin="0,3,0,0"/>
+
+                        <Border Background="{DynamicResource SurfaceDeepBrush}" BorderBrush="{DynamicResource StrokeSoftBrush}" BorderThickness="1" CornerRadius="10" Padding="10,8" Margin="0,13,0,0">
+                            <StackPanel>
+                                <TextBlock Text="DATA FOLDER" Style="{StaticResource MicroLabel}"/>
+                                <TextBlock x:Name="DataPathText" FontFamily="{StaticResource MonoFont}" FontSize="8.5"
+                                           Foreground="{StaticResource TextMutedBrush}" Margin="0,4,0,0" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Button Style="{StaticResource SecondaryButton}" Margin="0,12,0,0" Click="Export_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource IcoSave}" Style="{StaticResource SmallButtonIcon}"/>
+                                <TextBlock Text="Export settings" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource SecondaryButton}" Margin="0,8,0,0" Click="OpenFolder_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource IcoLayers}" Style="{StaticResource SmallButtonIcon}"/>
+                                <TextBlock Text="Open data folder" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource DangerGhostButton}" Margin="0,8,0,0" Height="36" Click="ResetAll_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Path Data="{StaticResource IcoRotate}" Style="{StaticResource SmallButtonIcon}" Stroke="{StaticResource RedBrush}"/>
+                                <TextBlock Text="Reset everything" Margin="8,0,0,0" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <!-- ABOUT -->
+                <Border Style="{StaticResource CardBorder}" Margin="0,14,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="44"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Width="40" Height="40" CornerRadius="11" Background="{DynamicResource AccentGradient}">
+                                <Path Data="{StaticResource IcoCrosshair}" Stroke="#07110D" StrokeThickness="1.8" Width="20" Height="20"
+                                      Stretch="Uniform" Fill="Transparent" StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="PRISM" FontSize="14" FontWeight="Bold" Foreground="{StaticResource TextBrush}"/>
+                                <TextBlock Text="Crosshair Studio · version 1.1.0" FontSize="9.5" Foreground="{StaticResource TextMutedBrush}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <Border Style="{StaticResource Divider}" Margin="0,14"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Style="{StaticResource Pill}" Padding="7,3" Margin="0,0,5,0">
+                                <TextBlock Text="WPF" FontFamily="{StaticResource MonoFont}" FontSize="8" Foreground="{StaticResource TextMutedBrush}"/>
+                            </Border>
+                            <Border Style="{StaticResource Pill}" Padding="7,3" Margin="0,0,5,0">
+                                <TextBlock Text=".NET 9" FontFamily="{StaticResource MonoFont}" FontSize="8" Foreground="{StaticResource TextMutedBrush}"/>
+                            </Border>
+                            <Border Style="{StaticResource Pill}" Padding="7,3" Margin="0,0,5,0">
+                                <TextBlock Text="NO WEBVIEW" FontFamily="{StaticResource MonoFont}" FontSize="8" Foreground="{StaticResource TextMutedBrush}"/>
+                            </Border>
+                            <Border Style="{StaticResource Pill}" Padding="7,3">
+                                <TextBlock Text="WIN 10/11" FontFamily="{StaticResource MonoFont}" FontSize="8" Foreground="{StaticResource TextMutedBrush}"/>
+                            </Border>
+                        </StackPanel>
+                        <TextBlock Text="A lightweight crosshair overlay with deep control over shape, color and behavior."
+                                   Style="{StaticResource MutedText}" FontSize="9.5" Margin="0,12,0,0"/>
+                        <Button Style="{StaticResource GhostButton}" HorizontalAlignment="Left" Height="30" Padding="0,0,8,0" Margin="0,8,0,0"
+                                Click="About_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="About" FontSize="10.5"/>
+                                <Path Data="{StaticResource IcoArrowRight}" Style="{StaticResource SmallButtonIcon}" Margin="6,0,0,0"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
+                <!-- TIP -->
+                <Border Style="{StaticResource CardBorder}" Margin="0,14,0,0" Background="{DynamicResource SurfaceBrush}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Path Data="{StaticResource IcoSpark}" Style="{StaticResource DecorativeIcon}" Stroke="{DynamicResource AccentText}" Width="15" Height="15"/>
+                            <TextBlock Text="Tip" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" Margin="7,0,0,0"/>
+                        </StackPanel>
+                        <TextBlock Text="For competitive games, use crosshairs allowed by the rules. PRISM is a tool for practice and single-player games."
+                                   Style="{StaticResource MutedText}" FontSize="9.5" Margin="0,7,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
+

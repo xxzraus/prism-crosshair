@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>Assets\prism.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>Prism</AssemblyName>
+    <RootNamespace>PrismCrosshair</RootNamespace>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Product>PRISM Crosshair Studio</Product>
+    <Company>PRISM</Company>
+    <Description>Lightweight gaming crosshair overlay and editor for Windows</Description>
+    <Copyright>© 2026 PRISM</Copyright>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <DebugType>embedded</DebugType>
+    <NoWarn>$(NoWarn);WFO0003</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\prism.ico" />
+    <Resource Include="Assets\prism.png" />
+    <EmbeddedResource Include="Localization\ru.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\prism.ico" />
+  </ItemGroup>
+
+</Project>

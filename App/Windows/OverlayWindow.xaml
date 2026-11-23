@@ -1,0 +1,23 @@
+<Window x:Class="PrismCrosshair.Windows.OverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:PrismCrosshair.Controls"
+        Title="PRISM Overlay"
+        Width="480" Height="480"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent"
+        Topmost="True" ShowInTaskbar="False" ResizeMode="NoResize"
+        ShowActivated="False" Focusable="False"
+        WindowStartupLocation="Manual" UseLayoutRounding="True">
+    <Grid x:Name="OverlayRoot" Background="Transparent"
+          MouseLeftButtonDown="OverlayRoot_MouseLeftButtonDown"
+          MouseMove="OverlayRoot_MouseMove"
+          MouseLeftButtonUp="OverlayRoot_MouseLeftButtonUp"
+          LostMouseCapture="OverlayRoot_LostMouseCapture">
+        <controls:CrosshairView x:Name="Reticle"
+                                RenderScale="1"
+                                PixelPerfect="True"
+                                Animate="True"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+    </Grid>
+</Window>
