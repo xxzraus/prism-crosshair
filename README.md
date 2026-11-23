@@ -1,5 +1,11 @@
 # PRISM — Crosshair Studio
 
+[![Build](https://github.com/xxzraus/prism-crosshair/actions/workflows/build.yml/badge.svg)](https://github.com/xxzraus/prism-crosshair/actions/workflows/build.yml)
+[![Latest release](https://img.shields.io/github/v/release/xxzraus/prism-crosshair?label=release)](https://github.com/xxzraus/prism-crosshair/releases)
+[![License: MIT](https://img.shields.io/badge/license-MIT-9aa4b2)](LICENSE)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-0078D4)](https://github.com/xxzraus/prism-crosshair)
+[![.NET](https://img.shields.io/badge/.NET-9-512BD4)](https://dotnet.microsoft.com/)
+
 A lightweight, native crosshair overlay for Windows with a deep reticle editor, profiles, a 48-color palette and live on-screen preview.
 
 Built with WPF and .NET 9 — no Electron, no WebView, no game injection. One process, static rendering at idle, and an overlay that stays exactly where you put it.
@@ -28,11 +34,13 @@ Built with WPF and .NET 9 — no Electron, no WebView, no game injection. One pr
 
 ### Portable
 
-Download `PRISM-Portable-1.1.0.zip`, extract it and run `Prism.exe`. The .NET runtime is bundled.
+[Download PRISM-Portable-1.1.0.zip](https://github.com/xxzraus/prism-crosshair/releases/download/v1.1.0/PRISM-Portable-1.1.0.zip), extract it and run `Prism.exe`. The .NET runtime is bundled.
 
 ### Installer
 
-Run `PRISM-Setup-1.1.0.exe`. It installs per user to `%LOCALAPPDATA%\Programs\PRISM` and creates desktop and Start Menu shortcuts.
+[Download PRISM-Setup-1.1.0.exe](https://github.com/xxzraus/prism-crosshair/releases/download/v1.1.0/PRISM-Setup-1.1.0.exe). It installs per user to `%LOCALAPPDATA%\Programs\PRISM` and creates desktop and Start Menu shortcuts.
+
+All builds are on the [Releases](https://github.com/xxzraus/prism-crosshair/releases) page.
 
 ## Usage
 
@@ -58,8 +66,8 @@ Requirements:
 - Inno Setup 6 (optional, for the installer)
 
 ```powershell
-git clone <repository-url>
-cd PRISM
+git clone https://github.com/xxzraus/prism-crosshair.git
+cd prism-crosshair
 
 dotnet build PRISM.sln -c Release
 dotnet run --project App/PrismCrosshair.csproj
@@ -106,7 +114,7 @@ PRISM is shaped by the people who use it. If something is missing, tell us what 
 - **Have an idea for a new shape, animation, language or quality-of-life option?** Post it — even if it is just a sketch.
 - **Want to improve the project?** Pull requests are welcome.
 
-Use the [issue templates](.github/ISSUE_TEMPLATE) or start a discussion in the repository. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before sending code.
+Use the [issue templates](.github/ISSUE_TEMPLATE), reply to the pinned [community wishlist](https://github.com/xxzraus/prism-crosshair/issues/4), or start a discussion in the repository. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before sending code.
 
 ## Support the project
 
