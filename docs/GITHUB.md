@@ -1,24 +1,19 @@
 # Publishing PRISM on GitHub
 
-This repository is ready for a public GitHub release. The source, documentation, CI workflow, issue templates and license are included; build artifacts are intentionally ignored.
+PRISM is live at **[github.com/xxzraus/prism-crosshair](https://github.com/xxzraus/prism-crosshair)**. The source, documentation, CI workflow, issue templates, funding link and license are in the repository; build artifacts are intentionally ignored.
 
-## 1. Create the repository
-
-1. Create a new empty repository on GitHub, for example `prism-crosshair`.
-2. Do **not** initialize it with a README, license or `.gitignore` — all three exist here.
-3. Add the remote and push:
+## 1. Push updates
 
 ```powershell
-cd PRISM
-git init
+git clone https://github.com/xxzraus/prism-crosshair.git
+cd prism-crosshair
+
 git add .
-git commit -m "Initial PRISM 1.1.0 release"
-git branch -M main
-git remote add origin https://github.com/<your-name>/prism-crosshair.git
-git push -u origin main
+git commit -m "Describe the change"
+git push origin main
 ```
 
-`Portable/*`, `Installer/*.exe`, `App/bin` and `App/obj` are ignored, so the push contains source and docs only.
+`Portable/*`, `Installer/*.exe`, `App/bin` and `App/obj` are ignored, so the repository contains source and docs only.
 
 ## 2. Repository settings
 
@@ -30,7 +25,7 @@ Suggested topics:
 
 `windows`, `wpf`, `csharp`, `dotnet`, `crosshair`, `overlay`, `gaming`, `localization`
 
-Enable **Actions** so `.github/workflows/build.yml` runs on pushes and pull requests.
+**Actions** is enabled and `.github/workflows/build.yml` runs on pushes and pull requests. Dependabot keeps the workflow actions up to date.
 
 ## 3. Create a release
 
@@ -39,13 +34,9 @@ Attach the built binaries manually to a GitHub Release:
 - `Portable/PRISM-Portable-1.1.0.zip`
 - `Installer/PRISM-Setup-1.1.0.exe`
 
-Tag format: `v1.1.0`. Release notes can reuse the matching `CHANGELOG.md` section.
+Tag format: `v1.1.0`. Release notes can reuse the matching `CHANGELOG.md` section. The live release is at [releases/tag/v1.1.0](https://github.com/xxzraus/prism-crosshair/releases/tag/v1.1.0).
 
-## 4. Replace the clone placeholder
-
-The root `README.md` contains `<repository-url>` in the build section. Replace it with your repository URL after creating the repository.
-
-## 5. Before publishing
+## 4. Before publishing
 
 - [ ] `dotnet build PRISM.sln -c Release -warnaserror` passes.
 - [ ] English and Russian UI checked.
